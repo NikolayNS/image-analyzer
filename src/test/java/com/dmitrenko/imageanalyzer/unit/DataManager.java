@@ -49,6 +49,19 @@ public class DataManager {
             .setUrl("https://t4.ftcdn.net/jpg/00/97/58/97/360_F_97589769_t45CqXyzjz0KXwoBZT9PRaWGHRk5hQqQ.jpg");
     }
 
+    public ImageRequest getFourthImageRequest() {
+        return new ImageRequest()
+            .setUrl("https://i.pinimg.com/originals/c8/c8/c8c89e2dda5ee3a23ea1a3b57f331c8c.jpg")
+            .setLabel("Cane")
+            .setEnableDetection(true);
+    }
+
+    public ImageRequest getBadImageRequest() {
+        return new ImageRequest()
+            .setLabel("Cane Corso")
+            .setEnableDetection(true);
+    }
+
     public ImaggaResponse getFistResponse() {
         return new ImaggaResponse()
             .setResult(new ImaggaResponseResults()
@@ -99,6 +112,12 @@ public class DataManager {
                         .setConfidence(23.89)
                         .setTag(new ImaggaResponseResultsTagsTag()
                             .setEn("portrait")))));
+    }
+
+    public ImaggaResponse getBadResponse() {
+        return new ImaggaResponse()
+            .setResult(new ImaggaResponseResults()
+                .setTags(List.of()));
     }
 
     @Transactional
@@ -156,6 +175,12 @@ public class DataManager {
         image = new Image().setUrl("someUrl6").setLabel(STATIC_LABEL);
         image.getObjects().addAll(imageObjectRepository.findByIdIn(ids));
         imageRepository.saveAndFlush(image);
+    }
+
+    @Transactional
+    public void cleanDatabase() {
+        imageRepository.deleteAll();
+        imageObjectRepository.deleteAll();
     }
 
     @Transactional

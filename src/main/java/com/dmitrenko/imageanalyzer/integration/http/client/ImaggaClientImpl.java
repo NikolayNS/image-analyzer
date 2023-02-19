@@ -49,12 +49,12 @@ public class ImaggaClientImpl implements ImaggaClient{
     private Mono<? extends Exception> clientExceptionResponse(ClientResponse response) {
         return response
             .bodyToMono(String.class)
-            .map(body -> new ClientResponseException(response.statusCode(), response.headers().asHttpHeaders(), body));
+            .map(body -> new ClientResponseException(response.statusCode(), body));
     }
 
     private Mono<? extends Exception> serverExceptionResponse(ClientResponse response) {
         return response
             .bodyToMono(String.class)
-            .map(body -> new ServerResponseException(response.statusCode(), response.headers().asHttpHeaders(), body));
+            .map(body -> new ServerResponseException(response.statusCode(), body));
     }
 }

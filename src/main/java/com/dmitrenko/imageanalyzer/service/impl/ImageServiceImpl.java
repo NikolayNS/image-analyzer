@@ -6,6 +6,7 @@ import com.dmitrenko.imageanalyzer.model.dto.response.ImageResponse;
 import com.dmitrenko.imageanalyzer.service.ImageService;
 import com.dmitrenko.imageanalyzer.service.domain.ImageDomainService;
 import com.dmitrenko.imageanalyzer.service.domain.ImageObjectDomainService;
+import com.dmitrenko.imageanalyzer.util.ValidationUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,7 +23,7 @@ public class ImageServiceImpl implements ImageService {
     @Value("${core-logic.confidence}")
     private Double confidence;
 
-    private final ValidationService validationService;
+    private final ValidationUtil validationUtil;
 
     private final ImageDomainService imageDomainService;
     private final ImageObjectDomainService imageObjectDomainService;
@@ -37,7 +38,7 @@ public class ImageServiceImpl implements ImageService {
 
         if (request.isEnableDetection()) {
             var imaggaResult = imaggaClient.analyze(request.getUrl());
-            imaggaResult = validationService.validate(imaggaResult);
+            imaggaResult = validationUtil.validate(imaggaResult);
 
             var topTags = imaggaResult.getResult()
                 .getTags()

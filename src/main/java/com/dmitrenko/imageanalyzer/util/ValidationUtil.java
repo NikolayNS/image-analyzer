@@ -1,4 +1,4 @@
-package com.dmitrenko.imageanalyzer.service.impl;
+package com.dmitrenko.imageanalyzer.util;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +10,7 @@ import org.springframework.validation.annotation.Validated;
 @Service
 @Validated
 @RequiredArgsConstructor
-public class ValidationService {
+public class ValidationUtil {
 
     public <D> D validate(@Valid D value) {
         log.info("Successful validation for request: {}", value.getClass());

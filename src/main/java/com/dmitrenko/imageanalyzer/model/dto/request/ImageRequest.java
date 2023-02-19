@@ -8,7 +8,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class ImageRequest {
 
-    @NotBlank(message = "field [url] can't be empty")
+    @NotBlank(message = "field [url] mustn't be empty")
     private String url;
 
     private String label;
